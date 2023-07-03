@@ -1,39 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <div>
-      데이터 바인딩: {{ msg }}
-    </div>
-    <div>
-      Computed: {{ reverseMsg }}
-    </div>
-    <div>
-      Watch : {{ count }}
-    </div>
-    <div>
-      <button @click="plusCount">카운트 증가</button>
-    </div>
     <hello-world :msg="msg" @click-msg="clickMsg"/>
-    <div>
-      <button @click="visibleInput = visibleInput = true">인풋 보이게하기</button>
-    </div>
-    <input v-model="count" v-if="visibleInput">
-    <ul>
-      <li v-for="(item, idx) in list" :key="idx">
-        {{ item }}
-      </li>
-    </ul>
+    <LifeCycle />
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import LifeCycle from "@/components/LifeCycle.vue";
 
 export default {
   name: 'App',
-  // components: {
-  //   HelloWorld
-  // },
+  components: {
+    LifeCycle
+  },
   data() {
     return {
       msg: 'Hello World',
