@@ -1,17 +1,22 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <hello-world msg="Welcome to Your Vue.js App" @click-msg="clickMsg"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  // components: {
+  //   HelloWorld
+  // },
+  methods: {
+    clickMsg() {
+      console.log('click')
+    }
   }
 }
 </script>
