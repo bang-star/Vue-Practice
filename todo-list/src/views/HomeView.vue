@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="title">할 일 추가 앱</h2>
       <div class="add-area">
-        <input v-model="todo" type="text" class="add-input" placeholder="할 일을 적어주세요.">
+        <v-input v-model="todo" />
         <button type="button" class="add-button" @click="addTodo">추가</button>
       </div>
       <ul class="todo-list">
@@ -29,8 +29,13 @@
 </template>
 
 <script>
+import VInput from "@/components/common/VInput.vue";
+
 export default {
   name: 'HomeView',
+  components: {
+    VInput,
+  },
   data() {
     return {
       todo: '',
@@ -69,7 +74,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home {
   width: 100%;
   height: 100vh;
@@ -96,24 +101,6 @@ export default {
   justify-content: end;
 }
 
-.add-input {
-  width: 120px;
-  height: 30px;
-
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, .15);
-  padding-left: 8px;
-  margin-right: 8px;
-}
-
-.add-input:hover {
-  border-color: rgba(0,0,0,.54);
-}
-
-.add-input:focus {
-  border-color: #00c4c4;
-}
-
 .add-button {
   width: 80px;
   height: 30px;
@@ -122,11 +109,11 @@ export default {
   color: #fff;
   cursor: pointer;
   margin: 16px 0;
-}
 
-.add-button:hover {
-  border-color: #00b2b2;
-  background-color: #00b2b2;
+  &:hover {
+    border-color: #00b2b2;
+    background-color: #00b2b2;
+  }
 }
 
 .todo-list {
@@ -144,10 +131,12 @@ export default {
   justify-content: space-between;
 }
 
-.button-area > svg {
-  cursor: pointer;
-  color: gray;
-  margin-left: 8px;
+.button-area {
+  svg {
+    cursor: pointer;
+    color: gray;
+    margin-left: 8px;
+  }
 }
 
 .todo-item__text {
@@ -158,14 +147,14 @@ export default {
   border: 1px solid rgba(0, 0, 0, .15);
   padding-left: 8px;
   margin-right: 8px;
-}
 
-.todo-item__text:hover {
-  border-color: rgba(0,0,0,.54);
-}
+  &:hover {
+    border-color: rgba(0, 0, 0, .54);
+  }
 
-.todo-item__text:focus {
-  border-color: #00c4c4;
+  &:focus {
+    border-color: #00c4c4;
+  }
 }
 
 .todo-item__status {
