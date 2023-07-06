@@ -4,7 +4,7 @@
       <h2 class="title">할 일 추가 앱</h2>
       <div class="add-area">
         <v-input v-model="todo" />
-        <button type="button" class="add-button" @click="addTodo">추가</button>
+        <v-button @click="addTodo" variant="outlined">추가</v-button>
       </div>
       <ul class="todo-list">
         <li class="todo-item" v-for="(item, index) in todoList" :key="index">
@@ -30,11 +30,13 @@
 
 <script>
 import VInput from "@/components/common/VInput.vue";
+import VButton from "@/components/common/VButton.vue";
 
 export default {
   name: 'HomeView',
   components: {
     VInput,
+    VButton,
   },
   data() {
     return {
@@ -101,20 +103,7 @@ export default {
   justify-content: end;
 }
 
-.add-button {
-  width: 80px;
-  height: 30px;
-  background-color: #00c4c4;
-  border: 1px solid #00c4c4;
-  color: #fff;
-  cursor: pointer;
-  margin: 16px 0;
 
-  &:hover {
-    border-color: #00b2b2;
-    background-color: #00b2b2;
-  }
-}
 
 .todo-list {
   width: 100%;
