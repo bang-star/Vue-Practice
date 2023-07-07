@@ -4,7 +4,8 @@
            :value="value"
            @input="change"
            class="v-input__text"
-           :placeholder="placeholder" />
+           :placeholder="placeholder"
+           @keypress.enter="$emit('enter')"/>
   </div>
 </template>
 
@@ -25,7 +26,7 @@ export default {
   },
   methods: {
     change(event) {
-      this.$emit('change', event.target.value);
+      this.$emit('input', event.target.value);
     }
   }
 };
@@ -34,23 +35,25 @@ export default {
 <style lang="scss" scoped>
 .v-input {
   display: inline-block;
-}
-.v-input__text {
   width: 120px;
   height: 30px;
 
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, .15);
-  padding-left: 8px;
-  margin-right: 8px;
+  &__text {
+    width: 100%;
+    height: 100%;
 
-  &:hover {
-    border-color: rgba(0,0,0,.54);
-  }
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    padding-left: 8px;
+    box-sizing: border-box;
 
-  &:focus {
-    border-color: #00c4c4;
+    &:hover {
+      border-color: rgba(0,0,0,.54);
+    }
+
+    &:focus {
+      border-color: #00c4c4;
+    }
   }
 }
-
 </style>
