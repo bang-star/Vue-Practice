@@ -42,28 +42,28 @@ export default {
   border-radius: 3px;
 
   &:hover {
-    border-color: #00b2b2;
-    background-color: #00b2b2;
+    border-color: $primary-focus;
+    background-color: $primary-focus;
   }
 }
 
 .contained {
-  background-color: #00c4c4;
-  border: 1px solid #00c4c4;
+  background-color: $primary;
+  border: 1px solid $primary;
 
   &:hover {
-    border-color: #00b2b2;
-    background-color: #00b2b2;
+    border-color: $primary-focus;
+    background-color: $primary-focus;
   }
 }
 
 .outlined {
   background-color: #fff;
-  border: 1px solid #00c4c4;
-  color: #00c4c4;
+  border: 1px solid $primary;
+  color: $primary;
 
   &:hover {
-    border-color: #00c4c4;
+    border-color: $primary;
     color: #fff;
   }
 }
