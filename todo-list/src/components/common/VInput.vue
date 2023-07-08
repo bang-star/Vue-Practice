@@ -52,7 +52,7 @@ export default {
     }
 
     &:focus {
-      border-color: $primary;
+      border-color: #00c4c4;
     }
   }
 }
