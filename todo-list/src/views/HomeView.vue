@@ -8,8 +8,7 @@
                  class="add-area__button"/>
         <v-button @click="addTodo" variant="outlined">추가</v-button>
       </div>
-      <todo-list :todoList="todoList"
-                 @remove="removeItem"/>
+      <todo-list :todoList="todoList"/>
     </div>
   </div>
 </template>
@@ -29,38 +28,26 @@ export default {
   data() {
     return {
       todo: '',
-      todoList: [
-        {
-          name: '축구',
-          isUpdate: false,
-          isChecked: false
-        },
-        {
-          name: '농구',
-          isUpdate: false,
-          isChecked: false
-        },
-        {
-          name: '테니스',
-          isUpdate: false,
-          isChecked: false
-        }
-      ],
+
     }
   },
   methods: {
     addTodo() {
-      this.todoList.push({
+      const item = {
         name: this.todo,
         isUpdate: false,
         isChecked: false,
-      });
+      };
+
+      this.$store.commit('addTodo', item);
+
       this.todo = '';
-    },
-    removeItem(idx) {
-      console.log(idx)
-      this.todoList = this.todoList.filter((item, index) => index !== idx);
-    },
+    }
+  },
+  computed: {
+    todoList() {
+      return this.$store.state.todoList;
+    }
   }
 }
 </script>

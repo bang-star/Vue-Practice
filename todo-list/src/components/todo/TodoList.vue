@@ -18,7 +18,7 @@
       <div class="button-area">
         <font-awesome-icon v-if="!item.isUpdate" :icon="['fas', 'pen']" @click="item.isUpdate = true"  />
         <font-awesome-icon v-else :icon="['fas', 'check']" @click="item.isUpdate = false" />
-        <font-awesome-icon :icon="['fass', 'trash']"  @click="$emit('remove', index)" />
+        <font-awesome-icon :icon="['fass', 'trash']"  @click="deleteTodo(index)" />
       </div>
     </li>
   </ul>
@@ -37,6 +37,12 @@ export default {
       default: () => [],
     }
   },
+  methods: {
+    deleteTodo(idx) {
+      console.log(idx)
+      this.$store.commit('deleteTodo', idx);
+    },
+  }
 }
 </script>
 
