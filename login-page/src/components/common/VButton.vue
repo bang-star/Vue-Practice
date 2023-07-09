@@ -17,7 +17,7 @@ export default {
     },
     variant: {
       type: String,
-      default: 'outlined' // contained, outlined
+      default: 'contained' // contained, outlined
     }
   },
   methods: {
@@ -34,7 +34,6 @@ export default {
   height: 30px;
   color: #fff;
   cursor: pointer;
-  margin: 16px 0;
 
   transition-property: background-color, border-color, color, opacity;
   transition-duration: .2s;

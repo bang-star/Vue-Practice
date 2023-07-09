@@ -1,0 +1,79 @@
+<template>
+  <form class="login-form"
+        @submit="clickLogin">
+    <label>
+      ID
+      <v-input class="login-form__text"
+               v-model="user.id" />
+    </label>
+    <label>
+      Password
+      <v-input
+        class="login-form__text"
+        type="password"
+        v-model="user.password"
+      />
+    </label>
+    <v-button class="login-form__button"
+              type="submit">
+      로그인
+    </v-button>
+    <v-button class="login-form__button"
+              variant="outlined">
+      회원가입
+    </v-button>
+  </form>
+</template>
+
+<script>
+import VInput from "@/components/common/VInput.vue";
+import VButton from "@/components/common/VButton.vue";
+import { loginUser } from "@/service/login";
+
+export default {
+  name: "login-form",
+  components: {
+    VInput,
+    VButton,
+  },
+  data() {
+    return {
+      user: {
+        id: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    clickLogin(event) {
+      const result = loginUser({
+        id: this.user.id,
+        password: this.user.password,
+      });
+
+      console.log(result);
+
+      // 페이지 이동 막기
+      event.preventDefault();
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-flow: column;
+
+  width: 100%;
+
+  &__text,
+  &__button,
+  label {
+    width: 100%;
+  }
+}
+</style>
