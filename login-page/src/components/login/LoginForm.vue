@@ -19,7 +19,8 @@
       로그인
     </v-button>
     <v-button class="login-form__button"
-              variant="outlined">
+              variant="outlined"
+              @click="clickSignUp">
       회원가입
     </v-button>
   </form>
@@ -28,7 +29,7 @@
 <script>
 import VInput from "@/components/common/VInput.vue";
 import VButton from "@/components/common/VButton.vue";
-import { loginUser } from "@/service/login";
+import { loginUser, testAPI } from "@/service/login";
 
 export default {
   name: "login-form",
@@ -56,6 +57,9 @@ export default {
       // 페이지 이동 막기
       event.preventDefault();
     },
+    clickSignUp() {
+      testAPI();
+    }
   },
 };
 </script>
