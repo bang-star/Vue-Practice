@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const userInfo = [
   {
     id: 'admin',
@@ -17,4 +19,9 @@ export const loginUser = (user) => {
      }else {
        return '존재하지 않은 아이디/비밀번호 입니다.';
      }
+}
+
+export const testAPI = async () => {
+  const result = await axios.get('http://localhost:3000/');
+  console.log(result)
 }
