@@ -31,6 +31,8 @@
 <script>
 import VInput from "@/components/common/VInput.vue";
 import VButton from "@/components/common/VButton.vue";
+import { signUp } from "@/service/signUp";
+
 export default {
   name: 'SignUpForm',
   components: {
@@ -49,12 +51,16 @@ export default {
     checkPassword() {
       this.isError = this.password !== this.confirmPassword;
     },
-    clickSignUp(id, password, confirmPassword, event) {
+    clickSignUp(id, password, event) {
       event.preventDefault();
 
       if (this.isError) return;
 
-      // == 구현 == //
+      const user = {
+        id: id,
+        password: password
+      }
+      signUp(user);
     }
   }
 }
