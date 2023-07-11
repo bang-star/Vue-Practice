@@ -4,8 +4,11 @@
            :value="value"
            @input="change"
            class="v-input__text"
+           :class="{ error : isError }"
            :placeholder="placeholder"
-           @keypress.enter="$emit('enter')"/>
+           @keypress.enter="$emit('enter')"
+           @blur="$emit('blur')" />
+    <span v-if="isError && errorMsg" class="error-msg">{{ errorMsg }}</span>
   </div>
 </template>
 
@@ -22,6 +25,14 @@ export default {
     },
     placeholder: {
       type: String
+    },
+    isError: {
+      type: Boolean,
+      default: false
+    },
+    errorMsg: {
+      type: String,
+      default: '',
     }
   },
   methods: {
@@ -54,6 +65,15 @@ export default {
     &:focus {
       border-color: $primary;
     }
+
+    &.error {
+      border: 1px solid $error;
+    }
+  }
+
+  .error-msg {
+    color: $error;
+    font-size: 12px;
   }
 }
 </style>
