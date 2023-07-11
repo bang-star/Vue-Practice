@@ -18,18 +18,19 @@
               type="submit">
       로그인
     </v-button>
-    <v-button class="login-form__button"
-              variant="outlined"
-              @click="clickSignUp">
-      회원가입
-    </v-button>
+    <router-link to="/signUp">
+      <v-button class="login-form__button"
+                variant="outlined">
+        회원가입
+      </v-button>
+    </router-link>
   </form>
 </template>
 
 <script>
 import VInput from "@/components/common/VInput.vue";
 import VButton from "@/components/common/VButton.vue";
-import { loginUser, testAPI } from "@/service/login";
+import { loginUser } from "@/service/login";
 
 export default {
   name: "login-form",
@@ -57,9 +58,6 @@ export default {
       // 페이지 이동 막기
       event.preventDefault();
     },
-    clickSignUp() {
-      testAPI();
-    }
   },
 };
 </script>
@@ -76,7 +74,7 @@ export default {
 
   &__text,
   &__button,
-  label {
+  a, label {
     width: 100%;
   }
 }
