@@ -12,11 +12,12 @@ const routes = [
     component: HomeView,
     beforeEnter: (to, from, next) => {
       console.log(to, from)
-      const isLogin = true;
+      const isLogin = false;
       if(isLogin) {
         return next();
       }else {
         alert('로그인을 해야합니다.');
+        return next('/login');
       }
     }
   },

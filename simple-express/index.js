@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const privateKey = process.env.private_key;
 
 app.use(express.json());
 app.use(cors());
@@ -18,7 +22,10 @@ app.post('/login', (req, res) => {
   if(userIndex > -1) {
 
     if(userInfo[userIndex].password === password) {
-      res.status(200).send('로그인 성공!');
+      res.status(200).send({
+        msg: '로그인 성공!',
+        accessToken: jwt.sign({ userId: id }, privateKey),
+      });
       return;
     }
 
