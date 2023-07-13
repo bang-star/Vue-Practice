@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignUpView from "@/views/SignUpView.vue";
+import store from "@/store";
 
 Vue.use(VueRouter)
 
@@ -11,8 +12,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     beforeEnter: (to, from, next) => {
-      console.log(to, from)
-      const isLogin = false;
+      const isLogin = store.getters.isLogin;
       if(isLogin) {
         return next();
       }else {
