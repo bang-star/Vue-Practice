@@ -24,7 +24,7 @@ app.post('/login', (req, res) => {
     if(userInfo[userIndex].password === password) {
       res.status(200).send({
         msg: '로그인 성공!',
-        accessToken: jwt.sign({ userId: id }, privateKey),
+        accessToken: jwt.sign({ userId: id }, privateKey, { expiresIn: '10s' }),
       });
       return;
     }
@@ -51,6 +51,23 @@ app.post('/signUp', (req, res) => {
   });
 
   res.status(200).send('회원가입 요청 성공');
+})
+
+app.get('/userInfo', (req, res) => {
+  const accessToken = req.header('access-token');
+  jwt.verify(accessToken, privateKey, (err, decoded) => {
+    if(err) {
+      if(err.name === 'TokenExpiredError') {
+        return res.status(401).send('토큰 유효기간 만료')
+      }
+      res.status(500).send('에러');
+      return;
+    }
+
+    res.status(200).json({
+      userInfo
+    })
+  })
 })
 
 const port = 3000;
