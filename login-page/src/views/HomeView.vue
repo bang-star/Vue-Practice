@@ -8,7 +8,7 @@
 
 <script>
 import VButton from '@/components/common/VButton.vue';
-import { getUserInfo } from "@/service/signUp";
+import { getUserInfoList } from "@/service/signUp";
 
 export default {
   name: "HomeView",
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     clickInfo() {
-      getUserInfo();
+      getUserInfoList();
     }
   }
 };

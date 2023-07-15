@@ -2,7 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import SignUpView from "@/views/SignUpView.vue";
-// import store from "@/store";
+import UsersView from "@/views/UsersView.vue";
+import UserView from "@/views/UserView.vue";
+import NotFoundView from "@/views/NotFoundView.vue";
 
 import { extendLoginTime } from "@/service/login";
 
@@ -40,6 +42,24 @@ const routes = [
     name: "signUp",
     component: SignUpView,
   },
+  {
+    path: "/users",
+    name: "users",
+    component: UsersView,
+  },
+  {
+    path: "/users/:id",
+    name: "user",
+    component: UserView,
+  },
+  {
+    path: '/not-found',
+    component: NotFoundView
+  },
+  {
+    path: "*",
+    redirect: '/not-found',
+  }
 ];
 
 const router = new VueRouter({

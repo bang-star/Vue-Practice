@@ -10,7 +10,11 @@ const refreshKey = process.env.refresh_key;
 app.use(express.json());
 app.use(cors());
 
-const userInfo = [];
+const userInfo = [
+  { id: 'aaa', password: 'aaa' },
+  { id: 'bbb', password: 'bbb' },
+  { id: 'ccc', password: 'ccc' },
+];
 
 app.get('/', (req, res) => {
   res.send('API 요청 성공');
@@ -25,8 +29,8 @@ app.post('/login', (req, res) => {
     if(userInfo[userIndex].password === password) {
       res.status(200).send({
         msg: '로그인 성공!',
-        accessToken: jwt.sign({ userId: id }, privateKey, { expiresIn: '10s' }),
-        refreshToken: jwt.sign({ userId: id }, refreshKey, { expiresIn: '10h' }),
+        accessToken: jwt.sign({ userId: id }, privateKey, { expiresIn: '10m' }),
+        refreshToken: jwt.sign({ userId: id }, refreshKey, { expiresIn: '30m' }),
       });
       return;
     }
@@ -64,6 +68,21 @@ app.get('/userInfo', (req, res) => {
 
     res.status(200).json({
       userInfo
+    })
+  })
+})
+
+app.get('/userInfo/:id', (req, res) => {
+  const accessToken = req.header('access-token');
+  const { id } = req.params;
+
+  jwt.verify(accessToken, privateKey, (err, decoded) => {
+    if(err) {
+      return res.status(401).send('토큰 오류');
+    }
+
+    res.status(200).json({
+      user: userInfo.find(item => item.id === id),
     })
   })
 })
