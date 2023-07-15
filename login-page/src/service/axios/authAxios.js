@@ -1,7 +1,6 @@
 import axios from "./axios";
 import store from "@/store";
 import { refreshToken } from "@/service/login";
-
 const authAxios = axios.create();
 
 // 요청 인터셉터 추가하기
@@ -32,8 +31,6 @@ authAxios.interceptors.response.use(
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
     // 응답 오류가 있는 작업 수행
     const errorAPI = error.config;
-    console.log("인터셉터 오류", error);
-    console.log(errorAPI.retry);  // undefined
     if (error.response.status === 401 && errorAPI.retry === undefined) {
       errorAPI.retry = true;
       await refreshToken();
@@ -42,5 +39,3 @@ authAxios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default authAxios;
