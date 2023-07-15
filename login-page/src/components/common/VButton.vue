@@ -1,31 +1,32 @@
 <template>
-  <button class="v-button"
-          :type="type"
-          @click="clickEvent"
-          :class="[variant]">
+  <button class="v-button" :type="type" @click="clickEvent" :class="[variant]">
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: 'VButton',
+  name: "VButton",
   props: {
     type: {
       type: String,
-      default: 'button'
+      default: "button",
     },
     variant: {
       type: String,
-      default: 'contained' // contained, outlined
-    }
+      default: "contained", // contained, outlined
+    },
   },
-  methods: {
-    clickEvent() {
-      this.$emit('click');
-    }
-  }
-}
+  setup(props, { emit }) {
+    const clickEvent = () => {
+      emit("click");
+    };
+
+    return {
+      clickEvent,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -36,8 +37,8 @@ export default {
   cursor: pointer;
 
   transition-property: background-color, border-color, color, opacity;
-  transition-duration: .2s;
-  border: 1px solid rgba(0,0,0,.15);
+  transition-duration: 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 3px;
 
   &:hover {

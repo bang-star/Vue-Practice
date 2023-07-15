@@ -15,13 +15,22 @@ export default {
   components: {
     VButton
   },
-  created() {
-    console.log("Created Home");
-  },
-  methods: {
-    clickInfo() {
+  setup() {
+    const clickInfo = () => {
       getUserInfoList();
+    };
+
+    return {
+      clickInfo,
     }
-  }
+  },
+  // created() {
+  //   console.log("Created Home");
+  // },
+  // methods: {
+  //   clickInfo() {
+  //     getUserInfoList();
+  //   }
+  // }
 };
 </script>

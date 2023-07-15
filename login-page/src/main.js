@@ -3,7 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueCookies from 'vue-cookies'
+import VueCompositionAPI from '@vue/composition-api'
 
+Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false
 
 // default options config: { expires: '1d', path: '/', domain: '', secure: '', sameSite: 'Lax' }

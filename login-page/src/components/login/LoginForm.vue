@@ -4,14 +4,14 @@
     <label>
       ID
       <v-input class="login-form__text"
-               v-model="user.id" />
+               v-model="id" />
     </label>
     <label>
       Password
       <v-input
         class="login-form__text"
         type="password"
-        v-model="user.password"
+        v-model="password"
       />
     </label>
     <v-button class="login-form__button"
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { ref } from "@vue/composition-api";
 import VInput from "@/components/common/VInput.vue";
 import VButton from "@/components/common/VButton.vue";
 import { loginUser } from "@/service/login";
@@ -38,27 +39,27 @@ export default {
     VInput,
     VButton,
   },
-  data() {
-    return {
-      user: {
-        id: "",
-        password: "",
-      },
-    };
-  },
-  methods: {
-    clickLogin(event) {
-      const result = loginUser({
-        id: this.user.id,
-        password: this.user.password,
-      });
+  setup() {
+    const id = ref("");
+    const password = ref("");
 
+    const clickLogin = (event) => {
+      const user = {
+        id: id.value,
+        password: password.value
+      };
+
+      const result = loginUser(user);
       console.log(result);
-
-      // 페이지 이동 막기
       event.preventDefault();
-    },
-  },
+    };
+
+    return {
+      id,
+      password,
+      clickLogin,
+    }
+  }
 };
 </script>
 
