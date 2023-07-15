@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const privateKey = process.env.private_key;
+const refreshKey = process.env.refresh_key;
 
 app.use(express.json());
 app.use(cors());
@@ -25,6 +26,7 @@ app.post('/login', (req, res) => {
       res.status(200).send({
         msg: '로그인 성공!',
         accessToken: jwt.sign({ userId: id }, privateKey, { expiresIn: '10s' }),
+        refreshToken: jwt.sign({ userId: id }, refreshKey, { expiresIn: '10h' }),
       });
       return;
     }
@@ -67,6 +69,22 @@ app.get('/userInfo', (req, res) => {
     res.status(200).json({
       userInfo
     })
+  })
+})
+
+app.get('/refreshToken', (req, res) => {
+  const refreshToken = req.header('refresh-token');
+
+  jwt.verify(refreshToken, refreshKey, (err, decoded) => {
+    if(err) {
+      if(err.name === 'TokenExpiredError') return res.status(401).send('토큰 유효기간 만료');
+      res.status(500).send('에러');
+      return;
+    }
+
+    res.status(200).json({
+      accessToken: jwt.sign({ userId: decoded.id }, privateKey, { expiresIn: '10s' }),
+    });
   })
 })
 
