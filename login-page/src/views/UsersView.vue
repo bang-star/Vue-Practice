@@ -12,23 +12,22 @@
 </template>
 
 <script>
+import {ref} from "@vue/composition-api";
 import { getUserInfoList } from "@/service/signUp";
 
 export default {
   name: "UsersView",
-  data() {
-    return {
-      userList: [],
-    }
-  },
-  created() {
-    this.userInfo();
-  },
-  methods: {
-    async userInfo() {
+  setup() {
+    const userList = ref([]);
+
+    const userInfo = async () => {
       const data = await getUserInfoList();
-      console.log(data);
       this.userList = data.userInfo;
+    };
+
+    return {
+      userList,
+      userInfo
     }
   }
 };
