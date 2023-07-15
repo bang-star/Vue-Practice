@@ -12,12 +12,26 @@ export const signUp = async (data) => {
   }
 }
 
-export const getUserInfo = async () => {
+export const getUserInfoList = async () => {
   try {
     // == 전역적으로 헤더에 토큰을 담는 방법 == //
     // axios.defaults.headers.common['access-token'] = '토큰';
-    await authAxios.get('/userInfo');
+    const { data } = await authAxios.get('/userInfo');
+    return data;
   }catch (err) {
     console.log("getUserInfo" + err);
   }
 }
+
+export const getUserInfo = async (id) => {
+  try {
+    // == 전역적으로 헤더에 토큰을 담는 방법 == //
+    // axios.defaults.headers.common['access-token'] = '토큰';
+    const { data } = await authAxios.get(`/userInfo/${id}`);
+    console.log(data)
+    return data;
+  }catch (err) {
+    console.log("getUserInfo" + err);
+  }
+}
+

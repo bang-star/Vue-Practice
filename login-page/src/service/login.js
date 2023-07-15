@@ -8,8 +8,8 @@ import router from "@/router";
 export const loginUser = async (user) => {
    try {
     const { data } = await axios.post('/login', user);
-     Vue.$cookies.set('accessToken', data.accessToken, '10s');
-     Vue.$cookies.set('refreshToken', data.refreshToken, '30s');
+     Vue.$cookies.set('accessToken', data.accessToken, '10m');
+     Vue.$cookies.set('refreshToken', data.refreshToken, '30m');
     // store.commit('setLogin', data);
     router.push('/');
    } catch (err) {
@@ -20,7 +20,7 @@ export const loginUser = async (user) => {
 export const extendLoginTime = async () => {
   try {
     const { data } = await authAxios.get("/refreshToken");
-    Vue.$cookies.set('accessToken', data.accessToken, '10s');
+    Vue.$cookies.set('accessToken', data.accessToken, '10m');
 
     // store.commit("setAccessToken", data.accessToken);
   } catch (err) {
