@@ -59,11 +59,7 @@ app.get('/userInfo', (req, res) => {
   const accessToken = req.header('access-token');
   jwt.verify(accessToken, privateKey, (err, decoded) => {
     if(err) {
-      if(err.name === 'TokenExpiredError') {
-        return res.status(401).send('토큰 유효기간 만료')
-      }
-      res.status(500).send('에러');
-      return;
+      return res.status(401).send('토큰 오류');
     }
 
     res.status(200).json({
