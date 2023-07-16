@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import VueCookies from 'vue-cookies'
 import VueCompositionAPI from '@vue/composition-api'
+import { initializeApp } from "firebase/app";
+import firebaseKey from "@/firebaseKey";
+
+initializeApp(firebaseKey);
 
 Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false
