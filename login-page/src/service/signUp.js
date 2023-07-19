@@ -1,7 +1,7 @@
 import axios from "@/service/axios/axios";
 import authAxios from "@/service/axios/authAxios";
 import router from "@/router";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, push, orderByChild, query, equalTo, onValue } from "firebase/database";
 
 export const signUp = async (data) => {
   try {
@@ -13,21 +13,21 @@ export const signUp = async (data) => {
   }
 };
 
-export const signUpInFirebase = () => {
+export const signUpInFirebase = (id, password) => {
   const db = getDatabase();
-  set(ref(db, 'users/' + 1), {
-    username: 'dinner',
-    email: '123',
+  push(ref(db, 'users/'), {
+    username: id,
+    password: password,
   });
 };
 
-export const getUserInFirebase = async () => {
+export const getUserInFirebase = async (id) => {
   const db = getDatabase();
-  const starCountRef = ref(db, 'users/' + 1);
-  onValue(starCountRef, (snapshot) => {
-    const data = snapshot.val();
-    console.log('getUserInFirebase', data);
-  });
+  const userRef = ref(db, 'users/');
+  const queryRef = query(userRef, orderByChild('username'), equalTo(id))
+  onValue(queryRef, (snapshot) => {
+    snapshot.val();
+  })
 }
 
 export const getUserInfoList = async () => {

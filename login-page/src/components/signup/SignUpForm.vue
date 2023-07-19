@@ -51,10 +51,10 @@ export default {
       event.preventDefault();
       if (user.isError) return;
       // signUp({ id, password });
-      signUpInFirebase();
+      signUpInFirebase(id, password);
     };
 
-    getUserInFirebase();
+    getUserInFirebase(id);
 
     return {
       user,
