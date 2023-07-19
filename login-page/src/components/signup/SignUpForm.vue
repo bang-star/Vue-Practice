@@ -27,7 +27,7 @@
 import { reactive } from "@vue/composition-api";
 import VInput from "@/components/common/VInput.vue";
 import VButton from "@/components/common/VButton.vue";
-import { signUp } from "@/service/signUp";
+import { signUpInFirebase, getUserInFirebase } from "@/service/signUp";
 
 export default {
   name: "SignUpForm",
@@ -50,8 +50,11 @@ export default {
     const clickSignUp = (id, password, event) => {
       event.preventDefault();
       if (user.isError) return;
-      signUp({ id, password });
+      // signUp({ id, password });
+      signUpInFirebase();
     };
+
+    getUserInFirebase();
 
     return {
       user,

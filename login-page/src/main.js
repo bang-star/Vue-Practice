@@ -6,8 +6,10 @@ import VueCookies from 'vue-cookies'
 import VueCompositionAPI from '@vue/composition-api'
 import { initializeApp } from "firebase/app";
 import firebaseKey from "@/firebaseKey";
+import {getDatabase} from "firebase/database";
 
-initializeApp(firebaseKey);
+const firebaseApp = initializeApp(firebaseKey);
+getDatabase(firebaseApp);
 
 Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false

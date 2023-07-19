@@ -1,37 +1,55 @@
 import axios from "@/service/axios/axios";
-import authAxios from "@/service/axios/authAxios"
+import authAxios from "@/service/axios/authAxios";
 import router from "@/router";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
 export const signUp = async (data) => {
   try {
     const { id, password } = data;
-    await axios.post('/signUp', { id, password });
-    router.push('/login');
+    await axios.post("/signUp", { id, password });
+    router.push("/login");
   } catch (err) {
     console.log(err);
   }
+};
+
+export const signUpInFirebase = () => {
+  const db = getDatabase();
+  set(ref(db, 'users/' + 1), {
+    username: 'dinner',
+    email: '123',
+  });
+};
+
+export const getUserInFirebase = async () => {
+  const db = getDatabase();
+  const starCountRef = ref(db, 'users/' + 1);
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+    console.log('getUserInFirebase', data);
+  });
 }
 
 export const getUserInfoList = async () => {
   try {
     // == 전역적으로 헤더에 토큰을 담는 방법 == //
     // axios.defaults.headers.common['access-token'] = '토큰';
-    const { data } = await authAxios.get('/userInfo');
+    const { data } = await authAxios.get("/userInfo");
     return data;
-  }catch (err) {
+  } catch (err) {
     console.log("getUserInfo" + err);
   }
-}
+};
 
 export const getUserInfo = async (id) => {
   try {
     // == 전역적으로 헤더에 토큰을 담는 방법 == //
     // axios.defaults.headers.common['access-token'] = '토큰';
     const { data } = await authAxios.get(`/userInfo/${id}`);
-    console.log(data)
+    console.log(data);
     return data;
-  }catch (err) {
+  } catch (err) {
     console.log("getUserInfo" + err);
   }
-}
+};
 
