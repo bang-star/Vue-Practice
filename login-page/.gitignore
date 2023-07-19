@@ -311,7 +311,10 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+firebaseKey.js
+
 # Windows shortcuts
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vuejs,webstorm+all,visualstudiocode,windows,macos
+
